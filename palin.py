@@ -8,29 +8,24 @@ import sys,random
 '''
 def has_cuentas(numero):
     numero=list(numero)
-    l=numero[0]
-    r=numero[-1]
-    f=False
-
     #print "numero %s, l%s y r%s" %(numero, l, r)
     length=len(numero)
-    while l != r:
+    while True:
+        if length > len(numero):
+            numero.insert(0,'0')
+        l=numero[0]
+        r=numero[-1]
+        if l == r:
+            break
+        f=False
+
         if int(l) == 0:
-            #f=True
             l=10
         if int(r) > int(l):
             numero=int("".join(numero)) + (int(l)+10 - int(r))
         else:
             numero=int("".join(numero)) + (int(l) - int(r))
-        #print "numoero sin el strint",numero
         numero=list(str(numero))
-        #print "length:%s len:%s" %(length,len(numero))
-        if length > len(numero):
-            numero.insert(0,'0')
-        #else:
-        l=numero[0]
-        r=numero[-1]
-        #print "numero %s, l%s y r%s" %(numero, l, r)
            
 
     return "".join(numero)
