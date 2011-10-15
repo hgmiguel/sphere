@@ -1,108 +1,81 @@
 #!/usr/bin/python
-'''
-Input:
-    2
-    808
-    2133
-    3 
-    9 
-    53936 
-    53236 
-    67775 
-    99 
-    999 
-    6339 
-    875111 
-    6997 
-Output:
-    818
-    2222
-    4 
-    11 
-    54045 
-    53335 
-    67776 
-    101 
-    1001 
-    6446 
-    875578 
-    7007 
-'''
+import sys,random
 
 '''
-Mas malo que nada
-print n
-while n != 0:
-    numero=raw_input()
+10 loops, best of 3: 55.7 msec per loop
+'''
+def has_cuentas(numero):
     numero=list(numero)
     l=numero[0]
     r=numero[-1]
+    f=False
 
-    if int(r)+1 > int(l):
-        numero[0]=str(int(l)+1)
-    else:
-        numero[-1]=str(int(r)+1)
-
-    print numero
-    n-=1
-
-'''
-def has_cuentas(numero):
-    numero=list(str(numero))
-    l=numero[0]
-    r=numero[-1]
-
+    print "numero %s, l%s y r%s" %(numero, l, r)
+    length=len(numero)
     while l != r:
+        if int(l) == 0:
+            #f=True
+            l=10
         if int(r) > int(l):
             numero=int("".join(numero)) + (int(l)+10 - int(r))
         else:
             numero=int("".join(numero)) + (int(l) - int(r))
-        print "numero sin el strint",numero
+        print "numoero sin el strint",numero
         numero=list(str(numero))
+        print "length:%s len:%s" %(length,len(numero))
+        if length > len(numero):
+            numero.insert(0,'0')
+        #else:
         l=numero[0]
         r=numero[-1]
         print "numero %s, l%s y r%s" %(numero, l, r)
            
 
-    return int("".join(numero))
+    return "".join(numero)
 
 
 def primera_aprox():
     n = int(raw_input())
-    #n = 5
+    #n = 1
     while n != 0:
         numero=int(raw_input()) +1
         print "numero inicial %s" %(numero)
 
-        numero=has_cuentas(numero)
+        numero=has_cuentas(str(numero))
         pasada=1
-        while str(numero) != "".join(list(str(numero))[::-1]):
+        while numero != "".join(list(numero)[::-1]):
             print "pasada %s, numero:%s" %(pasada, numero)
-            numero=list(str(numero))
+            numero=list(numero)
             lados=numero[0:pasada]
             numero=numero[pasada:-(pasada)]
             print "despues de recortarlo %s" %("".join(numero))
-            numero=has_cuentas(int("".join(numero)))
-            numero=int("".join(lados) + str(numero) + "".join(lados[::-1]))
+            numero=has_cuentas("".join(numero))
+            numero="".join(lados) + str(numero) + "".join(lados[::-1])
             pasada+=1
         
         print "el buenas",numero
 
         n-=1
-'''
-        print "despues del primero %s" %(numero)
-        if str(numero) == "".join(list(str(numero))[::-1]):
-            print "jjjjjj",numero
-        else:
-            numero=list(str(numero))
-            lados=numero[0],numero[-1]
-            numero=numero[1:-1]
-            print "despues de recortarlo %s" %("".join(numero))
-            numero=has_cuentas(int("".join(numero)))
-            print "segunda",lados[0] + str(numero) + lados[1]
-  '''          
+
+    sys.stdin.seek(0)
+
+def genera_numeros(numeros={}):
+    t=int(random.random() * 1000000)
+    tc=t
+    while True:
+        tc+=1
+        if str(tc) == str(tc)[::-1]:
+            numeros[t]=tc
+            break
+
 
 
 
 if __name__ == '__main__':
+    #numeros={}
+    #for x in xrange(1,100):
+    #    genera_numeros(numeros)
+    
+    #for x in numeros:
+    #    print "in:%s,out:%s" % (x,numeros[x])
     primera_aprox()
