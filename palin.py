@@ -2,7 +2,9 @@
 import sys,random
 
 '''
-10 loops, best of 3: 55.7 msec per loop
+10 loops, best of 3: 55.7 msec per loop bad
+10 loops, best of 3: 97.3 msec per loop ok
+100 loops, best of 3: 3.44 msec per loop sin los print
 '''
 def has_cuentas(numero):
     numero=list(numero)
@@ -10,7 +12,7 @@ def has_cuentas(numero):
     r=numero[-1]
     f=False
 
-    print "numero %s, l%s y r%s" %(numero, l, r)
+    #print "numero %s, l%s y r%s" %(numero, l, r)
     length=len(numero)
     while l != r:
         if int(l) == 0:
@@ -20,15 +22,15 @@ def has_cuentas(numero):
             numero=int("".join(numero)) + (int(l)+10 - int(r))
         else:
             numero=int("".join(numero)) + (int(l) - int(r))
-        print "numoero sin el strint",numero
+        #print "numoero sin el strint",numero
         numero=list(str(numero))
-        print "length:%s len:%s" %(length,len(numero))
+        #print "length:%s len:%s" %(length,len(numero))
         if length > len(numero):
             numero.insert(0,'0')
         #else:
         l=numero[0]
         r=numero[-1]
-        print "numero %s, l%s y r%s" %(numero, l, r)
+        #print "numero %s, l%s y r%s" %(numero, l, r)
            
 
     return "".join(numero)
@@ -39,21 +41,21 @@ def primera_aprox():
     #n = 1
     while n != 0:
         numero=int(raw_input()) +1
-        print "numero inicial %s" %(numero)
+        #print "numero inicial %s" %(numero)
 
         numero=has_cuentas(str(numero))
         pasada=1
         while numero != "".join(list(numero)[::-1]):
-            print "pasada %s, numero:%s" %(pasada, numero)
+            #print "pasada %s, numero:%s" %(pasada, numero)
             numero=list(numero)
             lados=numero[0:pasada]
             numero=numero[pasada:-(pasada)]
-            print "despues de recortarlo %s" %("".join(numero))
+            #print "despues de recortarlo %s" %("".join(numero))
             numero=has_cuentas("".join(numero))
             numero="".join(lados) + str(numero) + "".join(lados[::-1])
             pasada+=1
         
-        print "el buenas",numero
+        print numero
 
         n-=1
 
